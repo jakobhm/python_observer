@@ -1,0 +1,1 @@
+pyuic4 ui_plot.ui > output.txt
