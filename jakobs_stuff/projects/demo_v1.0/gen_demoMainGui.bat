@@ -1,0 +1,1 @@
+pyuic4 demoMainGui.ui > demoMainGui.py

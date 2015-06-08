@@ -72,11 +72,3 @@ for i in range(0, burstSize):
     time.sleep(sleepTime/1000.0)
 
 print "done"
-
-
-
-
-
-
-
-

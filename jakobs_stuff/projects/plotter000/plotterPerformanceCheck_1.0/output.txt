@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui_plot.ui'
 #
-# Created: Thu Jun 04 19:27:47 2015
+# Created: Mon Jun 08 13:52:43 2015
 #      by: PyQt4 UI code generator 4.9.6
 #
 # WARNING! All changes made in this file will be lost!
@@ -26,7 +26,7 @@ except AttributeError:
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName(_fromUtf8("MainWindow"))
-        MainWindow.resize(684, 445)
+        MainWindow.resize(713, 470)
         self.centralwidget = QtGui.QWidget(MainWindow)
         self.centralwidget.setMinimumSize(QtCore.QSize(525, 344))
         self.centralwidget.setMaximumSize(QtCore.QSize(10000, 10000))
