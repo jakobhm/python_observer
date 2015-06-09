@@ -12,6 +12,11 @@ from PyQt4 import QtCore, QtGui
 import PyQt4.Qwt5 as Qwt
 from UDPServerDeamon import UDPServerDeamon
 
+class Something():
+    def __call__(self, e):
+        print "Event empfangen"
+
+
 class controller:
     
     def __init__(self):
@@ -62,6 +67,10 @@ class controller:
         self.serverDeamon.setDatagramBufferSize(65535)
         self.serverDeamon.setMyUDPIP("10.27.192.90")
         self.serverDeamon.setMyUDPPort(60111)
+        
+        self.asdf=Something()
+        self.serverDeamon.subscribe(self.asdf)
+        
         self.serverDeamon.start()
         
     def __stopServer(self):
@@ -76,13 +85,7 @@ class controller:
     def __del__(self):
         print "Destruktor gestartet"
 
-
-
-
-
 if __name__ == "__main__":
     
     c = controller()
     c.start()
-    
-    

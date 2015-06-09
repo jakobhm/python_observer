@@ -51,7 +51,7 @@ class UDPServerDeamon(threading.Thread):
             self.__datagramFIFOHighWater=1
 
     def run(self):
-         
+        
         self.sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM) # UDP
         self.sock.bind((self.__MY_UDP_IP, self.__MY_UDP_PORT))         
         self.sock.settimeout(1)
@@ -69,7 +69,7 @@ class UDPServerDeamon(threading.Thread):
                     break
             
             if self.__serverActive:
-                self.__lock.aquire()
+                self.__lock.acquire()
                 self.__fifo.push(dataRaw)
                 if self.__fifo.getSize() >= self.__datagramFIFOHighWater:
                     self.__fire()
@@ -86,11 +86,11 @@ class UDPServerDeamon(threading.Thread):
     def __fire(self):
         e = Event()
         e.source=self
-        for i in self.__callbacks:
-            i(e)
+        for cb in self.__callbacks:
+            cb(e)
             
     def getDatagram(self):
-        self.__lock.aquire()
+        self.__lock.acquire()
         if not self.__fifo.isEmpty():
             answer = self.__fifo.pull()
         self.__lock.release()
