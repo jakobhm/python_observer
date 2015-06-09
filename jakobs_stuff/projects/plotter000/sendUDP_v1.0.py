@@ -8,8 +8,8 @@ Created on Wed Apr 15 10:45:56 2015
 import socket
 import time
 
-UDP_IP = "127.0.0.1"
-UDP_PORT = 0xAAAA
+UDP_IP = "10.27.192.90"
+UDP_PORT = 60111
 MESSAGE = "Hello, World!"
 
 print "UDP target IP:", UDP_IP
