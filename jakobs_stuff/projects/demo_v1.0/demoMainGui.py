@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'demoMainGui.ui'
 #
-# Created: Mon Jun 08 18:01:05 2015
+# Created: Tue Jun 09 10:46:27 2015
 #      by: PyQt4 UI code generator 4.9.6
 #
 # WARNING! All changes made in this file will be lost!
@@ -41,6 +41,9 @@ class Ui_MainWindow(object):
         self.pushButtonStartServer = QtGui.QPushButton(self.centralwidget)
         self.pushButtonStartServer.setObjectName(_fromUtf8("pushButtonStartServer"))
         self.verticalLayout.addWidget(self.pushButtonStartServer)
+        self.pushButtonStopServer = QtGui.QPushButton(self.centralwidget)
+        self.pushButtonStopServer.setObjectName(_fromUtf8("pushButtonStopServer"))
+        self.verticalLayout.addWidget(self.pushButtonStopServer)
         self.pushButtonStartContView = QtGui.QPushButton(self.centralwidget)
         self.pushButtonStartContView.setObjectName(_fromUtf8("pushButtonStartContView"))
         self.verticalLayout.addWidget(self.pushButtonStartContView)
@@ -62,6 +65,8 @@ class Ui_MainWindow(object):
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow", None))
         self.pushButtonStartServer.setText(_translate("MainWindow", "Start Server", None))
+        self.pushButtonStopServer.setText(_translate("MainWindow", "Stop Server", None))
         self.pushButtonStartContView.setText(_translate("MainWindow", "Open Conitnuous View", None))
         self.pushButtonStartTriggerView.setText(_translate("MainWindow", "Open Triggered View", None))
         self.pushButtonConfigurations.setText(_translate("MainWindow", "Configurations", None))
+

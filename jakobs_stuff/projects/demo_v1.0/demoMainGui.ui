@@ -30,6 +30,13 @@
          </widget>
         </item>
         <item>
+         <widget class="QPushButton" name="pushButtonStopServer">
+          <property name="text">
+           <string>Stop Server</string>
+          </property>
+         </widget>
+        </item>
+        <item>
          <widget class="QPushButton" name="pushButtonStartContView">
           <property name="text">
            <string>Open Conitnuous View</string>

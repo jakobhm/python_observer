@@ -10,11 +10,11 @@ import demoConfigurationsGui
 import demoMainGui
 from PyQt4 import QtCore, QtGui
 import PyQt4.Qwt5 as Qwt
+from UDPServerDeamon import UDPServerDeamon
 
 class controller:
     
     def __init__(self):
-        print "Konstruktor gestartet"
         self.__srcIP="192.168.178.21"
         
     def start(self):
@@ -41,7 +41,9 @@ class controller:
         self.ui_demoMainGui.setupUi(self.win_demoMainGui)
         #ui_demoMainGui.timer = QtCore.QTimer()
 
-        self.ui_demoMainGui.pushButtonConfigurations.clicked.connect(lambda: self.__startDemoConfigurationsGui())    
+        self.ui_demoMainGui.pushButtonConfigurations.clicked.connect(lambda: self.__startDemoConfigurationsGui())
+        self.ui_demoMainGui.pushButtonStartServer.clicked.connect(lambda: self.__startServer())
+        self.ui_demoMainGui.pushButtonStopServer.clicked.connect(lambda: self.__stopServer())
     
         self.win_demoMainGui.show()
         #return win_demoMainGui, ui_demoMainGui
@@ -53,6 +55,18 @@ class controller:
         #ui_demoConfigurationGui.timer = QtCore.QTimer()
         self.ui_demoConfigurationsGui.buttonBox.clicked.connect(lambda: self.__setSrcIP(self.ui_demoConfigurationsGui.lineEditSrcIP.text()))
         self.win_demoConfigurationsGui.show()
+        
+    def __startServer(self):
+        self.serverDeamon = UDPServerDeamon(5)
+        self.serverDeamon.daemon=True
+        self.serverDeamon.setDatagramBufferSize(65535)
+        self.serverDeamon.setMyUDPIP("10.27.192.90")
+        self.serverDeamon.setMyUDPPort(60111)
+        self.serverDeamon.start()
+        
+    def __stopServer(self):
+        self.serverDeamon.stopServer()
+        self.serverDeamon.join()
         
     def __setSrcIP(self, srcIP):
         print "srcIP=", self.__srcIP
