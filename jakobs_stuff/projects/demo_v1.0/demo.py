@@ -8,16 +8,14 @@ Created on Mon Jun 08 18:05:00 2015
 import sys
 import demoConfigurationsGui
 import demoMainGui
+from DemoContinuousView import DemoContinuousView
 from PyQt4 import QtCore, QtGui
 import PyQt4.Qwt5 as Qwt
 from UDPServerDeamon import UDPServerDeamon
 
-class Something():
-    def __call__(self, e):
-        print "Event empfangen"
-
 
 class controller:
+    
     
     def __init__(self):
         self.__srcIP="192.168.178.21"
@@ -30,6 +28,8 @@ class controller:
         
         self.win_demoConfigurationsGui = demoConfigurationsGui.QtGui.QDialog()
         self.ui_demoConfigurationsGui = demoConfigurationsGui.Ui_Dialog()
+        
+        self.__contVew = DemoContinuousView()
 
         # start demoMainGui
     
@@ -49,6 +49,7 @@ class controller:
         self.ui_demoMainGui.pushButtonConfigurations.clicked.connect(lambda: self.__startDemoConfigurationsGui())
         self.ui_demoMainGui.pushButtonStartServer.clicked.connect(lambda: self.__startServer())
         self.ui_demoMainGui.pushButtonStopServer.clicked.connect(lambda: self.__stopServer())
+        self.ui_demoMainGui.pushButtonStartContView.clicked.connect(lambda: self.__startContinuousView())
     
         self.win_demoMainGui.show()
         #return win_demoMainGui, ui_demoMainGui
@@ -68,14 +69,18 @@ class controller:
         self.serverDeamon.setMyUDPIP("10.27.192.90")
         self.serverDeamon.setMyUDPPort(60111)
         
-        self.asdf=Something()
-        self.serverDeamon.subscribe(self.asdf)
-        
         self.serverDeamon.start()
         
     def __stopServer(self):
         self.serverDeamon.stopServer()
         self.serverDeamon.join()
+        
+    def __startContinuousView(self):
+        
+        self.__contVew.showGui()        
+        
+        if self.serverDeamon != None and self.serverDeamon.isAlive():
+            self.serverDeamon.subscribe(self.__contVew)
         
     def __setSrcIP(self, srcIP):
         print "srcIP=", self.__srcIP

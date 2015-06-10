@@ -1,0 +1,1 @@
+pyuic4 demoContinuousViewGui.ui > demoContinuousViewGui.py

@@ -15,6 +15,7 @@ class Event(object):
         self.source=None
 
 class UDPServerDeamon(threading.Thread):
+    #lock = threading.Lock()
     
     def __init__(self, datagramFIFOSize):
         super(UDPServerDeamon, self).__init__()
@@ -31,7 +32,7 @@ class UDPServerDeamon(threading.Thread):
         self.__fifo=DatagramFIFO(self.__datagramFIFOSize)
          
         self.__callbacks=[]
-        self.__lock = threading.Lock()
+        
          
         print "Server erstellt"
          
@@ -69,11 +70,19 @@ class UDPServerDeamon(threading.Thread):
                     break
             
             if self.__serverActive:
-                self.__lock.acquire()
+                #UDPServerDeamon.lock.acquire()
                 self.__fifo.push(dataRaw)
+                
                 if self.__fifo.getSize() >= self.__datagramFIFOHighWater:
+                    flag_fire = True
+                else:
+                    flag_fire = False
+
+                #UDPServerDeamon.lock.release()
+                                
+                if flag_fire:
                     self.__fire()
-                self.__lock.release()
+                    
                 print ('at {} message from {}'.format(datetime.now(), addr))
              
     def stopServer(self):
@@ -90,8 +99,8 @@ class UDPServerDeamon(threading.Thread):
             cb(e)
             
     def getDatagram(self):
-        self.__lock.acquire()
+        #UDPServerDeamon.lock.acquire()
         if not self.__fifo.isEmpty():
             answer = self.__fifo.pull()
-        self.__lock.release()
+        #UDPServerDeamon.lock.release()
         return answer
